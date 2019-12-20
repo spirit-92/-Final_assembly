@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Console\Commands;
+
+
+use Illuminate\Console\Command;
+use App\GetWeatherFoo;
+
+class GetWeather extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'city:name{city}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Get weather';
+
+
+    public function handle()
+    {
+        $weather = new GetWeatherFoo();
+        $weather2 = $weather->getWeather($this->argument('city'));
+        var_dump($weather2);
+    }
+}
