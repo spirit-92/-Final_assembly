@@ -26,13 +26,15 @@ class GetWeather extends Command
     public function handle()
     {
         $weather = new GetWeatherFoo();
-        $weather2 = $weather->getWeather($this->argument('city'));
-
-        if ($weather2->cod === '404'){
-            $this->error($weather2->message);
+        if (!is_numeric($this->argument('city'))){
+            $weather2 = $weather->getWeather($this->argument('city'));
+            if ($weather2->cod === '404'){
+                $this->error($weather2->message);
+            }else{
+                var_dump(json_encode($weather2));
+            }
         }else{
-            var_dump(json_encode($weather2));
+            $this->error('не строка');
         }
-
     }
 }
