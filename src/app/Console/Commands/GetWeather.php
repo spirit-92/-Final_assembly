@@ -27,6 +27,12 @@ class GetWeather extends Command
     {
         $weather = new GetWeatherFoo();
         $weather2 = $weather->getWeather($this->argument('city'));
-        var_dump($weather2);
+
+        if ($weather2->cod === '404'){
+            $this->error($weather2->message);
+        }else{
+            var_dump(json_encode($weather2));
+        }
+
     }
 }

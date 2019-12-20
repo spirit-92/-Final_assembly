@@ -20,6 +20,6 @@ class GetWeatherFoo
         curl_setopt($ch, CURLOPT_URL, $url.'?'.http_build_query($option) );
         $response = curl_exec($ch);
         curl_close($ch);
-        return $response;
+        return json_decode($response);
     }
 }
