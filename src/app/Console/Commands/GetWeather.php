@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\GetWeatherFoo;
 
+
 class GetWeather extends Command
 {
     /**
@@ -25,6 +26,7 @@ class GetWeather extends Command
 
     public function handle()
     {
+
         $weather = new GetWeatherFoo();
         if (!is_numeric($this->argument('city'))){
             $weather2 = $weather->getWeather($this->argument('city'));
