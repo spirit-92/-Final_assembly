@@ -11,9 +11,10 @@
 <form action="/rest" method="get">
     <select name="city">
         <option value="Kiev">Kiev</option>
-        <option value="Kiev">Kiev</option>
-        <option value="Kiev">Kiev</option>
-        <option value="Kiev">Kiev</option>
+        <option value="Moscow">Moscow</option>
+        <option value="Minsk">Minsk</option>
+        <option value="London">London</option>
+        <option value="Yaounde">Yaounde</option>
     </select>
     <p><input type="submit" value="Узнать"></p>
 </form>
