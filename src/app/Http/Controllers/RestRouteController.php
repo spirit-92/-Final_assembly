@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\GetWeatherFoo;
 class RestRouteController extends Controller
 {
     /**
@@ -11,11 +11,17 @@ class RestRouteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+     $city =  $request->get('city');
+     $weather = new GetWeatherFoo();
+     $getWeather= $weather->getWeather($city);
+     $icon =  $getWeather->{'weather'}[0]->{'icon'};
+        return view('weather',[
+            'weather' => $getWeather,
+            'icon' => $icon
+        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +29,7 @@ class RestRouteController extends Controller
      */
     public function create()
     {
-        //
+//        return $_GET['city'];
     }
 
     /**
@@ -34,7 +40,7 @@ class RestRouteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -45,7 +51,7 @@ class RestRouteController extends Controller
      */
     public function show($id)
     {
-        //
+//       var_dump($id);
     }
 
     /**

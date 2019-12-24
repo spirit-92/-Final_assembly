@@ -11,6 +11,18 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('form');
 });
+Route::resource('rest','RestRouteController')->names('restTest');
+
+
+//Route::resource('restTest.store','RestRouteController@store')->names('restTest2');
+
+Route::post('/rest2', function ($sd) {
+    return 'sd';
+});
+
+
