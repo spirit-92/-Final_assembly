@@ -35,7 +35,8 @@
         <div class="main__wrap" id="primary">
             <h2 class="main__title">Добавить запах</h2>
             <div id="modalAdd">
-                <form method="post" id="perfume_form" class="main__add">
+                <form method="post" id="perfume_form" class="main__add" action="/perfumes">
+                    @csrf
                     <div class=" main__item">
                         <label class="main__clause">Имя </label>
                         <input id="name" name="name" type="text" class="main__input" placeholder="Введите имя">
@@ -92,7 +93,6 @@
                         <button id="save_perfumes_button" type="submit" class="main__save">Сохранить</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

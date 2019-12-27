@@ -12,7 +12,7 @@
 */
 
 
-Route::resource('/rest','RestController')->names('restTest');
-//Route::get('/rest', function () {
-//    return view('welcome');
-//});
+Route::post('/perfumes','RestController@index')->name('perfumes');
+Route::get('/', function () {
+    return view('welcome');
+});

@@ -12,11 +12,11 @@ class RestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        Route::get('/rest', function () {
-                return view('welcome');
-        });
+        $data = $request->post();
+        var_dump($data);
+//        return view('welcome');
     }
 
     /**
