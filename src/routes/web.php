@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::resource('/rest','RestController')->names('restTest');
+//Route::get('/rest', function () {
+//    return view('welcome');
+//});
