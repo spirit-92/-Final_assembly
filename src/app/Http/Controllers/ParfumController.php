@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\services\Parfume;
+use App\Models\AddParfume;
 
 class ParfumController extends Controller
 {
@@ -13,75 +14,46 @@ class ParfumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
+    {
+        return view('welcome');
+    }
+
+    public function create(Request $request)
     {
         $data = $request->post();
-        $validParfume = Parfume::getPerfumes($data);
-//        var_dump($data);
-//        return view('welcome');
+        $addParfume = new AddParfume(['name'=>$data['name'],'slug'=>$data['slug'],'description'=>$data['description'],'big_img'=>$data['big_icon'],'small_img'=>$data['small_icon'],'category'=>$data['category']]);
+//        $addParfume->save();
+        return redirect()->back([
+            'error'=> 'no valid'
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

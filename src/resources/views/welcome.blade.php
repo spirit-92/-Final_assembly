@@ -40,6 +40,7 @@
                     <div class=" main__item">
                         <label class="main__clause">Имя </label>
                         <input id="name" name="name" type="text" class="main__input" placeholder="Введите имя">
+
                     </div>
                     <div class=" main__item">
                         <label class="main__clause">Slug </label>

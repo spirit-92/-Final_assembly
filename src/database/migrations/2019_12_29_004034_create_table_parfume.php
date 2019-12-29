@@ -13,11 +13,14 @@ class CreateTableParfume extends Migration
      */
     public function up()
     {
-        Schema::create('parfume', function (Blueprint $table) {
+        Schema::create('userAdd', function (Blueprint $table) {
             $table->integer('id',true);
-            $table->string('name');
-            $table->string('slug');
-
+            $table->string('name',10)->unique();
+            $table->string('slug',10);
+            $table->text('description');
+            $table->string('big_img');
+            $table->string('small_img');
+            $table->integer('category');
         });
     }
 
@@ -28,6 +31,6 @@ class CreateTableParfume extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parfume');
+        Schema::dropIfExists('userAdd');
     }
 }

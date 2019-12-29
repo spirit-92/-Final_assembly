@@ -41,7 +41,12 @@ class ImportParfumes extends Command
         $parfume = [
             'Action',
             'Nature',
-            'City'
+            'Food',
+            'City',
+            'Village',
+            'Aroma',
+            'Flowers',
+            'Lifestyle'
         ];
         foreach ($parfume as $parfumeName){
             $parfume = new Parfume(['name'=>$parfumeName]);
