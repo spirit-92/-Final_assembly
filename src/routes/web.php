@@ -12,7 +12,7 @@
 */
 
 
-Route::post('/perfumes','RestController@index')->name('perfumes');
+Route::post('/perfumes','ParfumController@index')->name('perfumes');
 Route::get('/', function () {
     return view('welcome');
 });
