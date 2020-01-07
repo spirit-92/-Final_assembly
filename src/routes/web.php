@@ -14,8 +14,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::post('/perfumes','ParfumController@create')->name('perfumes');
+Route::post('/perfumes','ParfumController@store')->name('perfumes');
 Route::get('/','ParfumController@index')->name('/');
-//Route::get('/', function () {
-//    return view('welcome');
+
+//Route::get('/perfume', function () {
+//    return view('my_parfume');
 //});

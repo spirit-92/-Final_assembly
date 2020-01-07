@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="http://93.119.155.54:1100/css/jquery.fancybox.min.css"/>
 </head>
 <body>
+<style>
+    .input_error{
+        border: 2px solid red;
+        width: 100%;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 16px;
+        line-height: 19px;
+        font-family: "Roboto", sans-serif;
+    }
+
+    .input_error::placeholder{
+        color: red;
+    }
+</style>
 <header class="header ">
     <div class="header__wrap row">
         <span class="header__name">FeelReal Admin Panel</span>
@@ -31,26 +46,50 @@
         </ul>
     </div>
     <div class="main">
-
         <div class="main__wrap" id="primary">
             <h2 class="main__title">Добавить запах</h2>
             <div id="modalAdd">
-                <form method="post" id="perfume_form" class="main__add" action="/perfumes">
+                <form method="post" id="perfume_form" enctype="multipart/form-data" class="main__add" action="/perfumes">
                     @csrf
                     <div class=" main__item">
                         <label class="main__clause">Имя </label>
-                        <input id="name" name="name" type="text" class="main__input" placeholder="Введите имя">
+                        @if(!isset(session('errors')['name'][0]))
+                            <input id="slug" name="name" type="text" class="main__input" placeholder="Введите имя">
+                        @else
+                            <input class="input_error" id="slug" name="name" type="text" class="main__input" placeholder="{{session('errors')['name'][0]}}">
+                        @endif
 
                     </div>
                     <div class=" main__item">
                         <label class="main__clause">Slug </label>
-                        <input id="slug" name="slug" type="text" class="main__input" placeholder="Введите slug">
+                            @if(!isset(session('errors')['slug'][0]))
+                                <input id="slug" name="slug" type="text" class="main__input" placeholder="Введите slug">
+                                @else
+                                <input class="input_error" id="slug" name="slug" type="text" class="main__input" placeholder="{{session('errors')['slug'][0]}}">
+                            @endif
                     </div>
                     <div class=" main__item">
                         <label class="main__clause">Описание </label>
-                        <textarea id="description" rows="10" name="description" class="main__input"
-                                  placeholder="Введите описание"></textarea>
+                        @if(!isset(session('errors')['description'][0]))
+                            <textarea id="description" rows="10" name="description" class="main__input"
+                                      placeholder="Введите описание"></textarea>
+                        @else
+                            <textarea id="description" rows="10" name="description" class="main__input input_error"
+                                      placeholder="{{session('errors')['description'][0]}}"></textarea>
+                        @endif
+
                     </div>
+                    @if(isset(session('errors')[0]) && count(session('errors'))==1)
+                      <h2 style="color: red;font-size: 20px">error: big or small icon {{session('errors')[0]}}</h2>
+                    @endif
+                    @if(isset(session('errors')[0]) && count(session('errors'))>1)
+                        <ul>
+                        @foreach (session('errors') as $error)
+                            <li style="color: red">{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    @endif
+
                     <div class=" main__item">
                         <label id="big_icon_label" class="main__clause">Большая иконка</label>
                         <input id="big_icon" name="big_icon" type="file">
@@ -72,19 +111,19 @@
                                 <option value="3"
                                         class="main__clause">Food
                                 </option>
-                                <option value="5"
+                                <option value="4"
                                         class="main__clause">City
                                 </option>
-                                <option value="6"
+                                <option value="5"
                                         class="main__clause">Village
                                 </option>
-                                <option value="7"
+                                <option value="6"
                                         class="main__clause">Aroma
                                 </option>
-                                <option value="8"
+                                <option value="7"
                                         class="main__clause">Flowers
                                 </option>
-                                <option value="11"
+                                <option value="8"
                                         class="main__clause">Lifestyle
                                 </option>
                             </select>
