@@ -139,3 +139,6 @@
 </div>
 </body>
 </html>
+<?php
+session(['key' => false]);
+?>
