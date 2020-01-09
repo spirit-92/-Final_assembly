@@ -69,7 +69,7 @@ class ParfumController extends Controller
             }
             $nameUser = $request->post('name');
             $urlImgBig = $request->file('big_icon')->store("public/img/$nameUser/big_icon");
-            $urlImgSmall = $request->file('big_icon')->store("public/img/$nameUser/small_icon");
+            $urlImgSmall = $request->file('small_icon')->store("public/img/$nameUser/small_icon");
             $data = $request->post();
             $addParfume = new AddParfume(['name' => $data['name'], 'slug' => $data['slug'], 'description' => $data['description'], 'big_img' => $urlImgBig, 'small_img' => $urlImgSmall, 'category' => $data['category']]);
             $addParfume->save();
