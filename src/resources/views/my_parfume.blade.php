@@ -10,9 +10,11 @@
 <body>
 <?php
 if (!empty($parfume)) {
-    var_dump($parfume[0]->big_img);
-    $img = $parfume[0]->big_img;
-    var_dump(asset('favicon.ico'));
+
+    $img = $parfume[2]->big_img;
+    var_dump($img);
+    var_dump(asset('storage/img/Dimas/big_icon/vx0BKoSsIRs0FsCWmkZy5qGWfBZE8LPes99OgK3X.png'));
+    var_dump(asset('storage/img/Dima/big_icon/vx0BKoSsIRs0FsCWmkZy5qGWfBZE8LPes99OgK3X.png'));
 }
 ?>
 <img src="{{asset('storage/img/Dima/big_icon/vx0BKoSsIRs0FsCWmkZy5qGWfBZE8LPes99OgK3X.png')}}" alt="">
