@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+use Illuminate\Support\Facades\Route;
+
+Route::post('/perfumes','ParfumController@store')->name('perfumes');
+Route::get('/','ParfumController@index')->name('/');
+
+//Route::get('/perfume', function () {
+//    return view('my_parfume');
+//});
