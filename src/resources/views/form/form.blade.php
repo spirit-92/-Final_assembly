@@ -116,14 +116,19 @@
                       h3">Создание фейкового пользователя</p>
         </div>
 
-        <form action="#"
+        <form action="/userAdd"
+              method="post"
+              enctype="multipart/form-data"
+
               class="text-secondary
                      border-bottom
                      p-2">
+            @csrf
             <div class="form-group">
                 <label for="nameInput">Имя</label>
                 <input type="text"
                        class="form-control"
+                       name="name"
                        id="nameInput"
                        placeholder="Введите имя">
             </div>
@@ -138,7 +143,7 @@
                 </div>
 
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="userProfilePhoto" required>
+                    <input type="file" name="img" class="custom-file-input" id="userProfilePhoto" required>
                     <label class="custom-file-label"
                            for="userProfilePhoto">Выберите файл</label>
                 </div>
@@ -146,35 +151,34 @@
 
             <div class="form-group">
                 <label for="dateBirthday">Дата рождения</label>
-                <input type="date"
+                <input name="dateBirthday" type="date"
                        id="dateBirthday"
                        class="form-control">
             </div>
 
             <div class="form-group">
                 <label for="userGender">Пол</label>
-                <select id="userGender"
+                <select name="gender" id="userGender"
                         class="form-control">
-                    <option>Мужской</option>
-                    <option>Женский</option>
+                    <option value="m">Мужской</option>
+                    <option value="w">Женский</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="userCountry">Страна</label>
-                <select id="userCountry"
+                <select name="country" id="userCountry"
                         class="form-control">
-                    <option>Страна 1</option>
-                    <option>Страна 2</option>
-                    <option>Страна 3</option>
-                    <option>Страна 4</option>
-                    <option>Страна 5</option>
+                    @if(isset($country))
+                        @foreach($country as $countrys)
+                            <option value="{{$countrys->id}}">{{$countrys->country}}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="userCity">Город</label>
-                <input type="text"
+                <input name="city" type="text"
                        id="userCity"
                        class="form-control"
                        placeholder="Укажите город">
@@ -182,7 +186,7 @@
 
             <div class="form-group">
                 <label for="userAboutYourself">О себе</label>
-                <textarea class="form-control"
+                <textarea name="aboutUser" class="form-control"
                           id="userAboutYourself"
                           rows="3"
                           placeholder="Расскажите немного о себе..."></textarea>
@@ -191,7 +195,7 @@
             <button class="btn
                    btn-primary
                    btn-success"
-                    type="button"
+                    type="submit"
                     aria-pressed="true">Сохранить</button>
         </form>
     </div>
