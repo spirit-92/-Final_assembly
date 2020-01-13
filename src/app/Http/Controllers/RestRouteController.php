@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\model\Fake_users;
 use App\model\Country;
 use Illuminate\Validation\ValidationException;
+use App\model\Add_fakeUsers;
 
 class RestRouteController extends Controller
 {
@@ -46,13 +47,32 @@ class RestRouteController extends Controller
                 'country' => 'required|exists:country,id',
                 'dateBirthday' => 'required|date|before:tomorrow',
                 'city' => "required|exists:city,city,id_country,$request->country",
-                'img'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-
+                'img'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'aboutUser'=> 'required'
             ]);
         } catch (ValidationException $e) {
-            var_dump($e->errors());
+            return redirect()->back()->with([
+                'errors' => $e->errors()
+            ]);
         }
+//        $nameUser = $request->post('name');
+//
+//        $imgUrl = $request->file('img')->store("public/img/$nameUser");
+     $urlImg = 'public/img/Дмитрийs/kMYgapEgqZtKYlJsLge7jw29rRuDt7khWGJnVN5p.png';
+        return view('form.main',[
+            'img'=>$urlImg
+        ]);
 
+//      $addFakeUser = new Add_fakeUsers([
+//          'username'=>$request->post('name'),
+//          'img'=>$imgUrl,
+//          'date_birth'=>$request->post('dateBirthday'),
+//          'gender'=>$request->post('gender'),
+//          'country'=>$request->post('country'),
+//          'city'=>$request->post('city'),
+//          'about_user' =>$request->post('aboutUser')
+//      ]);
+//      $addFakeUser->save();
     }
 
     /**

@@ -18,7 +18,15 @@
     <!--Заголовок страницы-->
     <title>Создание фейкового пользователя</title>
 </head>
-
+<style>
+    .error::placeholder{
+        color: red;
+    }
+    .error{
+        border: 2px solid red;
+        color: red;
+    }
+</style>
 <body>
 <div class="container-fluid
             no-gutters
@@ -127,10 +135,10 @@
             <div class="form-group">
                 <label for="nameInput">Имя</label>
                 <input type="text"
-                       class="form-control"
+                       class="@if(isset(session('errors')['name'][0]))form-control error @else form-control @endif"
                        name="name"
                        id="nameInput"
-                       placeholder="Введите имя">
+                       placeholder="@if(isset(session('errors')['name'][0])){{session('errors')['name'][0]}}@elseВведите имя@endif">
             </div>
 
             <div class="form-group">
@@ -144,13 +152,13 @@
 
                 <div class="custom-file">
                     <input type="file" name="img" class="custom-file-input" id="userProfilePhoto" required>
-                    <label class="custom-file-label"
-                           for="userProfilePhoto">Выберите файл</label>
+                    <label class="@if(isset(session('errors')['img'][0]))custom-file-label error @else custom-file-label @endif"
+                           for="userProfilePhoto">@if(isset(session('errors')['img'][0])){{session('errors')['img'][0]}}@else Выберите файл @endif</label>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="dateBirthday">Дата рождения</label>
+            <div class="@if(isset(session('errors')['dateBirthday'][0]))form-group error @else form-group @endif">
+                <label for="dateBirthday">@if(isset(session('errors')['dateBirthday'][0])){{session('errors')['dateBirthday'][0]}} @else Дата рождения @endif</label>
                 <input name="dateBirthday" type="date"
                        id="dateBirthday"
                        class="form-control">
@@ -165,7 +173,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="userCountry">Страна</label>
+                <label class="@if(isset(session('errors')['country'][0]))form-group error @else form-group @endif" for="userCountry">@if(isset(session('errors')['country'][0])){{session('errors')['country'][0]}} @else Страна @endif</label>
                 <select name="country" id="userCountry"
                         class="form-control">
                     @if(isset($country))
@@ -180,16 +188,16 @@
                 <label for="userCity">Город</label>
                 <input name="city" type="text"
                        id="userCity"
-                       class="form-control"
-                       placeholder="Укажите город">
+                       class="@if(isset(session('errors')['city'][0]))form-group error @else form-group @endif"
+                       placeholder="@if(isset(session('errors')['city'][0])){{session('errors')['city'][0]}} @else Укажите город @endif">
             </div>
 
-            <div class="form-group">
+            <div class="@if(isset(session('errors')['aboutUser'][0]))form-group error @else form-group @endif">
                 <label for="userAboutYourself">О себе</label>
                 <textarea name="aboutUser" class="form-control"
                           id="userAboutYourself"
                           rows="3"
-                          placeholder="Расскажите немного о себе..."></textarea>
+                          placeholder="@if(isset(session('errors')['aboutUser'][0])){{session('errors')['aboutUser'][0]}} @else Расскажите немного о себе... @endif"></textarea>
             </div>
 
             <button class="btn
