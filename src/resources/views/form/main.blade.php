@@ -7,6 +7,7 @@
 </head>
 <body>
 {{--storage/app/{{$img}}--}}
-{{--<img src="app/public/img/Dima2/G3zAs1VGMde7n27miUchxFNu5IEj5A07iJIK6f3B.png" alt="">--}}
+<img src="storage/img/Dima2/G3zAs1VGMde7n27miUchxFNu5IEj5A07iJIK6f3B.png" alt="">
 </body>
 </html>
+
