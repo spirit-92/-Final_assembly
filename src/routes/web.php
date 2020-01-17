@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('form.form');
+//});
+Route::post('/userAdd','RestRouteController@store')->name('userAdd');
+Route::get('/','RestRouteController@index')->name('/');
