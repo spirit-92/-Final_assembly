@@ -1,7 +1,4 @@
 <?php
-use Faker\Factory as Faker;
-$faker = Faker::create();
-var_dump($faker->name);
 
 ?>
 <!doctype html>
@@ -15,7 +12,8 @@ var_dump($faker->name);
     <title>Document</title>
 </head>
 <body>
-<form>
+<form action="/addAuthor" method="post" style="width: 600px;margin: 0 auto">
+    @csrf
     <div class="form-group">
         <label for="exampleFormControlInput1">name</label>
         <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="name">
@@ -23,7 +21,11 @@ var_dump($faker->name);
     <div class="form-group">
         <label for="exampleFormControlSelect1">authors</label>
         <select name="authors" class="form-control" id="exampleFormControlSelect1">
-           <option>s</option>
+            @if(isset($authors))
+                @foreach($authors as $author)
+                    <option value="{{$author->id}}">{{$author->name}}</option>
+                @endforeach
+            @endif
         </select>
     </div>
     <div class="form-group">
@@ -33,13 +35,14 @@ var_dump($faker->name);
     <div class="form-group">
         <label for="exampleFormControlSelect3">auditions</label>
         <select name="auditions" class="form-control" id="exampleFormControlSelect1">
-            <option>s</option>
+            @if(isset($authors))
+                @foreach($auditions as $audition)
+                    <option value="{{$audition->id}}">{{$audition->city}}</option>
+                @endforeach
+            @endif
         </select>
-    </div
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </body>
 </html>

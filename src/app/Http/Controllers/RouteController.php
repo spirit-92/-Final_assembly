@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\model\Audition;
+use App\model\Author;
+use Illuminate\Validation\ValidationException;
 class RouteController extends Controller
 {
     /**
@@ -13,7 +15,12 @@ class RouteController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $authors = Author::all();
+        $auditions = Audition::all();
+        return view('welcome',[
+            'authors'=>$authors,
+            'auditions'=>$auditions
+        ]);
     }
 
     /**
@@ -34,7 +41,18 @@ class RouteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->validate($request, [
+                'name' => 'required|max:10|min:3',
+                'authors' => 'required|exists:authors,id',
+                'years' => 'required|numeric',
+                'auditions' => "required|exists:authors,id",
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->with([
+                'errors' => $e->errors()
+            ]);
+        }
     }
 
     /**

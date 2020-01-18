@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 Route::get('/','RouteController@index')->name('/');
-Route::post('/addAuthor','RestRouteController@store')->name('addAuthor');
+Route::post('/addAuthor','RouteController@store')->name('addAuthor');
