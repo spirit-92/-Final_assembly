@@ -14,7 +14,7 @@ class CreateBaseReader extends Migration
     public function up()
     {
         Schema::create('baseReader', function (Blueprint $table) {
-            $table->integer('id_reader')->index();
+            $table->integer('id_reader')->unique();
             $table->integer('id_book')->index();
         });
     }
