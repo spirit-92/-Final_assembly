@@ -14,7 +14,7 @@ class CreateReaders extends Migration
     public function up()
     {
         Schema::create('readers', function (Blueprint $table) {
-            $table->integer('id')->index();
+            $table->integer('id')->unique();
             $table->string('name',100);
             $table->integer('rate');
         });
