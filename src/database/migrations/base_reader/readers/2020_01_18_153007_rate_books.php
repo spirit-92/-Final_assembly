@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBaseReader extends Migration
+class RateBooks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateBaseReader extends Migration
      */
     public function up()
     {
-        Schema::create('baseReader', function (Blueprint $table) {
-            $table->integer('id')->primary();
-            $table->integer('id_reader');
-            $table->integer('id_book');
-            $table->integer('id_rate');
+        Schema::create('rateBook', function (Blueprint $table) {
+            $table->integer('id')->unique();
+            $table->integer('rate');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateBaseReader extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('baseReader');
+        Schema::dropIfExists('rateBook');
     }
 }

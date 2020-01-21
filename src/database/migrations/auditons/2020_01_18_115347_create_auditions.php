@@ -14,7 +14,7 @@ class CreateAuditions extends Migration
     public function up()
     {
         Schema::create('auditions', function (Blueprint $table) {
-            $table->integer('id')->index();
+            $table->integer('id')->primary();
             $table->integer('city')->index();
             $table->integer('owner')->index();
         });

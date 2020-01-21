@@ -14,12 +14,12 @@ class CreateBooks extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->integer('id')->autoIncrement();
             $table->string('name',50);
             $table->integer('author_id');
             $table->year('year');
-            $table->integer('audition_id')->unique();
-            $table->integer('base_reader');
+            $table->integer('audition_id');
+
         });
 
     }

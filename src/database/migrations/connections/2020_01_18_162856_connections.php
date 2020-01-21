@@ -19,9 +19,7 @@ class Connections extends Migration
         Schema::table('books', function($table) {
             $table->foreign('audition_id')->references('id')->on('auditions');
         });
-        Schema::table('books', function($table) {
-            $table->foreign('base_reader')->references('id_book')->on('baseReader');
-        });
+
         Schema::table('auditions', function($table) {
             $table->foreign('city')->references('id')->on('city');
         });
@@ -31,8 +29,15 @@ class Connections extends Migration
         Schema::table('city', function($table) {
             $table->foreign('country_id')->references('id')->on('country');
         });
-        Schema::table('readers', function($table) {
-            $table->foreign('id')->references('id_reader')->on('baseReader');
+        Schema::table('baseReader', function($table) {
+            $table->foreign('id_reader')->references('id')->on('readers');
+        });
+        Schema::table('baseReader', function($table) {
+            $table->foreign('id_rate')->references('id')->on('rateBook');
+        });
+
+        Schema::table('baseReader', function($table) {
+            $table->foreign('id_book')->references('id')->on('books');
         });
     }
 

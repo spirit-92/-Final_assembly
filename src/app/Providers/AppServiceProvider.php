@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         foreach ($scans as $scan){
             if ($scan !== '.' && $scan != '..'){
                 if (is_dir($start.'/'.$scan)){
-                    $dir =  self::scandirs($start.'/'.$scan);
+                    self::scandirs($start.'/'.$scan);
                     self::$start[] = $start.'/'.$scan;
                 }
             }
