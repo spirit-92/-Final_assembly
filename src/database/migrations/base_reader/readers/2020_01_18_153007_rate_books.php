@@ -14,7 +14,7 @@ class RateBooks extends Migration
     public function up()
     {
         Schema::create('rateBook', function (Blueprint $table) {
-            $table->integer('id')->unique();
+            $table->smallInteger('id')->unique();
             $table->integer('rate');
         });
     }

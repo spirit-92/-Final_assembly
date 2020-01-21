@@ -51,7 +51,7 @@ class UsersTFakebleSeeder extends Seeder
             DB::table('books')->insert([
                 'name' => $faker->text(20),
                 'author_id'=>rand(1,10),
-                'year'=>$faker->year('now'),
+                'year'=>rand(1,2019),
                 'audition_id'=>rand(1,10)
             ]);
         }

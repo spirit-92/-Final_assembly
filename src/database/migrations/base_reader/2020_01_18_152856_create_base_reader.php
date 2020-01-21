@@ -17,7 +17,7 @@ class CreateBaseReader extends Migration
             $table->integer('id')->primary();
             $table->integer('id_reader');
             $table->integer('id_book');
-            $table->integer('id_rate');
+            $table->smallInteger('id_rate');
         });
     }
 

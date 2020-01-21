@@ -17,9 +17,8 @@ class CreateBooks extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('name',50);
             $table->integer('author_id');
-            $table->year('year');
+            $table->smallInteger('year');
             $table->integer('audition_id');
-
         });
 
     }

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookAdd;
+use App\model\Book;
 use Illuminate\Http\Request;
 use App\model\Audition;
 use App\model\Author;
 use Illuminate\Validation\ValidationException;
-class RouteController extends Controller
+
+class RouteBookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +18,9 @@ class RouteController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
-        $auditions = Audition::all();
-        return view('welcome',[
-            'authors'=>$authors,
-            'auditions'=>$auditions
+        return view('welcome', [
+            'authors' => Author::all(),
+            'auditions' => Audition::all()
         ]);
     }
 
@@ -28,37 +29,45 @@ class RouteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $addBook = new Book([
+            'name' => $request->name,
+            'author_id' => $request->authors,
+            'year' => $request->years,
+            'audition_id' => $request->auditions
+        ]);
+        $addBook->save();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        if (session('key')) {
+            return view('bookView.book');
+        }
         try {
-            $this->validate($request, [
-                'name' => 'required|max:10|min:3',
-                'authors' => 'required|exists:authors,id',
-                'years' => 'required|numeric',
-                'auditions' => "required|exists:authors,id",
-            ]);
+            $this->validate($request, StoreBookAdd::createFromBase($request)->rules());
         } catch (ValidationException $e) {
             return redirect()->back()->with([
                 'errors' => $e->errors()
             ]);
         }
+        session(['key' => true]);
+        $this->create($request);
+        return view('bookView.book');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,7 +78,7 @@ class RouteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +89,8 @@ class RouteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +101,7 @@ class RouteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

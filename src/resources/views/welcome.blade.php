@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,12 +8,36 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Document</title>
 </head>
+<style>
+    .error{
+        border: 2px solid red;
+        padding-left: 10px;
+    }
+    .error::placeholder{
+        color: red;
+    }
+    .formBook{
+        margin-top: 80px;
+    }
+</style>
 <body>
-<form action="/addAuthor" method="post" style="width: 600px;margin: 0 auto">
+
+<h1 style="text-align: center;margin-top: 20px;">Add Book</h1>
+<div class="formBook">
+<form action="/addBook" method="post" style="width: 600px;margin: 0 auto">
     @csrf
     <div class="form-group">
-        <label for="exampleFormControlInput1">name</label>
-        <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="name">
+        <label for="exampleFormControlInput1">Name</label>
+        <input
+{{--            class="@if($errors->get('name'))form-control error @else form-control @endif"--}}
+               type="text" name="name" class="form-control"
+               id="exampleFormControlInput1"
+{{--               placeholder="@if($errors->get('name'))--}}
+{{--               @foreach ($errors->get('name') as $errorName)--}}
+{{--                {{$errorName}}--}}
+{{--                @endforeach--}}
+{{--               @elseВведите имя@endif"--}}
+        >
     </div>
     <div class="form-group">
         <label for="exampleFormControlSelect1">authors</label>
@@ -30,7 +51,16 @@
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">years</label>
-        <input type="text" name="years" class="form-control" id="exampleFormControlInput2" placeholder="years">
+        <input
+            type="text" name="years"
+{{--            class="@if($errors->get('years'))form-control error @else form-control @endif"--}}
+            id="exampleFormControlInput2"
+{{--            placeholder="@if($errors->get('years'))--}}
+{{--            @foreach ($errors->get('years') as $errorYears)--}}
+{{--            {{$errorYears}}--}}
+{{--            @endforeach--}}
+{{--            @elseВведите год@endif"--}}
+        >
     </div>
     <div class="form-group">
         <label for="exampleFormControlSelect3">auditions</label>
@@ -44,5 +74,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 </body>
 </html>
+<?php
+session(['key' => false]);?>

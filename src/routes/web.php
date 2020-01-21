@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/','RouteController@index')->name('/');
-Route::post('/addAuthor','RouteController@store')->name('addAuthor');
+Route::get('/','RouteBookController@index')->name('/');
+
+Route::post('/addBook','RouteBookController@store')->name('addBook');
+
