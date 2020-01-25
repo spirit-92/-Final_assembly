@@ -24,7 +24,7 @@
 <body>
 <h1 style="text-align: center;margin-top: 20px;">Add Book</h1>
 <div class="formBook">
-<form action="/addBook" method="post" style="width: 600px;margin: 0 auto">
+<form action="/addBook" method="get" style="width: 600px;margin: 0 auto">
     @csrf
     <div class="form-group">
         <label for="exampleFormControlInput1">Name</label>

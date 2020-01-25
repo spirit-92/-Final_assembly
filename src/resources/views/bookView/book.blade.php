@@ -31,6 +31,7 @@
     <input type="text" class="form-control" placeholder="Search books" aria-label="Search books" aria-describedby="addon-wrapping">
 </div>
 @if(isset($books))
+    @csrf
     <div style="margin-top: 70px;" class="container">
             <div class="row">
                 @foreach($books as $book)
@@ -58,7 +59,12 @@
                         <div class="card-body">
                             <a href="book/{{$book['id']}}" class="card-link">About book</a>
                             <a href="#" class="card-link">Editing book</a>
-                            <button class="btn btn-danger" style="margin-top: 15px;">delete</button>
+                            <form action="{{url('/bookDelete', ['id' => $book['id']])}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit"  class="btn btn-danger" style="margin-top: 15px;">delete</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use App\model\Book;
 use Illuminate\Http\Request;
 use App\model\Author;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 
 class RouteBookController extends Controller
@@ -120,6 +121,8 @@ class RouteBookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        BaseReader::where('id_book',$id)->delete();
+        Book::destroy($id);
+        return redirect()->back();
     }
 }

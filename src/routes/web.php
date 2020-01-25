@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::get('/','RouteBookController@index')->name('/');
 
-Route::post('/addBook','RouteBookController@store')->name('addBook');
+Route::get('/addBook','RouteBookController@store')->name('addBook');
 
 Route::get('/book/{id}','RouteBookController@show')->name('book');
+Route::delete('/bookDelete/{id}', 'RouteBookController@destroy');
