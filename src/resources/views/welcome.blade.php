@@ -20,8 +20,8 @@
         margin-top: 80px;
     }
 </style>
-<body>
 
+<body>
 <h1 style="text-align: center;margin-top: 20px;">Add Book</h1>
 <div class="formBook">
 <form action="/addBook" method="post" style="width: 600px;margin: 0 auto">
@@ -29,14 +29,12 @@
     <div class="form-group">
         <label for="exampleFormControlInput1">Name</label>
         <input
-{{--            class="@if($errors->get('name'))form-control error @else form-control @endif"--}}
+            class="@if(isset(session('errors')['name']))form-control error @else form-control @endif"
                type="text" name="name" class="form-control"
                id="exampleFormControlInput1"
-{{--               placeholder="@if($errors->get('name'))--}}
-{{--               @foreach ($errors->get('name') as $errorName)--}}
-{{--                {{$errorName}}--}}
-{{--                @endforeach--}}
-{{--               @elseВведите имя@endif"--}}
+               placeholder="@if(isset(session('errors')['name']))
+                {{session('errors')['name'][0]}}
+               @elseВведите имя@endif"
         >
     </div>
     <div class="form-group">
@@ -53,13 +51,11 @@
         <label for="exampleFormControlInput1">years</label>
         <input
             type="text" name="years"
-{{--            class="@if($errors->get('years'))form-control error @else form-control @endif"--}}
+            class="@if(isset(session('errors')['years']))form-control error @else form-control @endif"
             id="exampleFormControlInput2"
-{{--            placeholder="@if($errors->get('years'))--}}
-{{--            @foreach ($errors->get('years') as $errorYears)--}}
-{{--            {{$errorYears}}--}}
-{{--            @endforeach--}}
-{{--            @elseВведите год@endif"--}}
+            placeholder="@if(isset(session('errors')['years']))
+                {{session('errors')['years'][0]}}
+            @elseВведите год@endif"
         >
     </div>
     <div class="form-group">

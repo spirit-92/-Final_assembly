@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\model\Audition;
+use App\model\Author;
+use App\model\BaseReader;
+use App\model\Book;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBookAdd extends FormRequest
@@ -34,6 +38,16 @@ class StoreBookAdd extends FormRequest
                 'years' => 'required|numeric|min:1400',
                 'auditions' => "required|exists:authors,id",
             ];
+
+    }
+    public function withValidator($validator)
+    {
+        view('bookView.book',[
+                'author'=> Author::all(),
+                'books'=> Book::all(),
+                'audition'=> Audition::all(),
+                'baseReader'=> BaseReader::all()
+            ]);
 
     }
 }

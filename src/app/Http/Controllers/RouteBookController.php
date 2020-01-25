@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookAdd;
+use App\model\Audition;
+use App\model\BaseReader;
 use App\model\Book;
 use Illuminate\Http\Request;
-use App\model\Audition;
 use App\model\Author;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class RouteBookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('welcome', [
@@ -48,8 +45,15 @@ class RouteBookController extends Controller
      */
     public function store(Request $request)
     {
+        $author = new Author();
+
         if (session('key')) {
-            return view('bookView.book');
+            return view('bookView.book', [
+                'author' => $author,
+                'books' => Book::all(),
+                'audition' => Audition::all(),
+                'baseReader' => BaseReader::all()
+            ]);
         }
         try {
             $this->validate($request, StoreBookAdd::createFromBase($request)->rules());
@@ -60,7 +64,12 @@ class RouteBookController extends Controller
         }
         session(['key' => true]);
         $this->create($request);
-        return view('bookView.book');
+        return view('bookView.book', [
+            'author' => $author,
+            'books' => Book::all(),
+            'audition' => Audition::all(),
+
+        ]);
 
     }
 
@@ -72,7 +81,12 @@ class RouteBookController extends Controller
      */
     public function show($id)
     {
-        //
+
+        return view('bookView.AboutBook', [
+            'book' => Book::find($id),
+            'author' => new Author(),
+//            'baseReader' => Book::all()
+        ]);
     }
 
     /**

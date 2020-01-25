@@ -8,4 +8,5 @@ class Audition extends Model
 {
     protected $table = 'auditions';
 
+
 }

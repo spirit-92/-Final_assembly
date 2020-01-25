@@ -21,3 +21,4 @@ Route::get('/','RouteBookController@index')->name('/');
 
 Route::post('/addBook','RouteBookController@store')->name('addBook');
 
+Route::get('/book/{id}','RouteBookController@show')->name('book');
