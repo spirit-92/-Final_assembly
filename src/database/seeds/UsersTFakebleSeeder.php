@@ -15,12 +15,12 @@ class UsersTFakebleSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for ($i = 1; $i <= 10; $i++) {
-            DB::table('authors')->insert([
-                'id'=> $i,
-                'name' => $faker->name
-            ]);
-        }
+//        for ($i = 1; $i <= 10; $i++) {
+//            DB::table('authors')->insert([
+//                'id'=> $i,
+//                'name' => $faker->name
+//            ]);
+//        }
         for ($i = 1; $i <= 10; $i++) {
             DB::table('owner')->insert([
                 'id'=> $i,
