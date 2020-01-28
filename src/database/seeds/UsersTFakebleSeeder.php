@@ -69,7 +69,6 @@ class UsersTFakebleSeeder extends Seeder
         }
         for ($i = 1; $i <= 10; $i++) {
             DB::table('baseReader')->insert([
-                'id'=> $i,
                 'id_reader' => rand(1,10),
                 'id_book'=>rand(1,10),
                 'id_rate'=>rand(1,10)

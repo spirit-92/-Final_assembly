@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBookAdd;
 use App\model\Audition;
 use App\model\BaseReader;
 use App\model\Book;
+use App\model\Owner;
 use Illuminate\Http\Request;
 use App\model\Author;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ class RouteBookController extends Controller
     public function index()
     {
         return view('welcome', [
+            'owners' => Owner::all(),
             'authors' => Author::all(),
             'auditions' => Audition::all()
         ]);
@@ -46,14 +48,10 @@ class RouteBookController extends Controller
      */
     public function store(Request $request)
     {
-        $author = new Author();
 
         if (session('key')) {
             return view('bookView.book', [
-                'author' => $author,
-                'books' => Book::all(),
-                'audition' => Audition::all(),
-                'baseReader' => BaseReader::all()
+                'books' => Book::all()
             ]);
         }
         try {
@@ -66,10 +64,7 @@ class RouteBookController extends Controller
         session(['key' => true]);
         $this->create($request);
         return view('bookView.book', [
-            'author' => $author,
-            'books' => Book::all(),
-            'audition' => Audition::all(),
-
+            'books' => Book::all()
         ]);
 
     }
@@ -82,11 +77,9 @@ class RouteBookController extends Controller
      */
     public function show($id)
     {
-
         return view('bookView.AboutBook', [
             'book' => Book::find($id),
             'author' => new Author(),
-//            'baseReader' => Book::all()
         ]);
     }
 
@@ -98,7 +91,12 @@ class RouteBookController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('bookView.EditBook', [
+            'book' => Book::find($id),
+            'authors' => Author::all(),
+            'owners' => Owner::all(),
+        ]);
+
     }
 
     /**
@@ -108,9 +106,16 @@ class RouteBookController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreBookAdd $request, $id)
     {
-        //
+        Book::find($id)->update([
+            'name' => $request->post()['name'],
+            'author_id' => $request->post()['authors'],
+            'year' => $request->post()['years'],
+            'audition_id'=> $request->post()['auditions']
+        ]);
+
+        return redirect('/books');
     }
 
     /**
@@ -121,8 +126,9 @@ class RouteBookController extends Controller
      */
     public function destroy($id)
     {
-        BaseReader::where('id_book',$id)->delete();
+        BaseReader::where('id_book', $id)->delete();
         Book::destroy($id);
         return redirect()->back();
     }
+
 }

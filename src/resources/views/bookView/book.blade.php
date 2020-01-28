@@ -33,6 +33,7 @@
 @if(isset($books))
     @csrf
     <div style="margin-top: 70px;" class="container">
+        <a style="text-align: center" class="nav-item nav-link" href="/AddReader">Add reader</a>
             <div class="row">
                 @foreach($books as $book)
                 <div class="cardMy col-4">
@@ -41,7 +42,7 @@
                         <div class="cardImg"></div>
                         <div class="card-body">
                             <h5 class="card-title">Book: {{$book['name']}}</h5>
-                            <p class="card-text">Author: {{$author::find($book['author_id'])->name}}</p>
+                            <p class="card-text">Author: {{$book->author->name}}</p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Year: {{$book['year']}}</li>
@@ -58,13 +59,12 @@
                         </ul>
                         <div class="card-body">
                             <a href="book/{{$book['id']}}" class="card-link">About book</a>
-                            <a href="#" class="card-link">Editing book</a>
+                            <a  href="bookUpdate/{{$book['id']}}" class="card-link">Editing book</a>
                             <form action="{{url('/bookDelete', ['id' => $book['id']])}}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit"  class="btn btn-danger" style="margin-top: 15px;">delete</button>
                             </form>
-
                         </div>
                     </div>
                 </div>

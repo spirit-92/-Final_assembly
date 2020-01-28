@@ -21,10 +21,11 @@
     }
 </style>
 
+
 <body>
 <h1 style="text-align: center;margin-top: 20px;">Add Book</h1>
 <div class="formBook">
-<form action="/addBook" method="get" style="width: 600px;margin: 0 auto">
+<form action="/books" method="get" style="width: 600px;margin: 0 auto">
     @csrf
     <div class="form-group">
         <label for="exampleFormControlInput1">Name</label>
@@ -61,9 +62,9 @@
     <div class="form-group">
         <label for="exampleFormControlSelect3">auditions</label>
         <select name="auditions" class="form-control" id="exampleFormControlSelect1">
-            @if(isset($authors))
-                @foreach($auditions as $audition)
-                    <option value="{{$audition->id}}">{{$audition->city}}</option>
+            @if(isset($owners))
+                @foreach($owners as $owner)
+                    <option value="{{$owner->id}}">{{$owner->name}}</option>
                 @endforeach
             @endif
         </select>

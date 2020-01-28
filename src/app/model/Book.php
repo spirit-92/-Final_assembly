@@ -28,6 +28,9 @@ class Book extends Model
         return $this->hasMany('App\model\BaseReader','id_book');
     }
 
-
+    public function auditions()
+    {
+        return $this->hasMany('App\model\Audition','owner');
+    }
 
 }

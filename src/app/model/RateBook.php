@@ -4,8 +4,8 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Owner extends Model
+class RateBook extends Model
 {
-    protected $table = 'owner';
+    protected $table = 'rateBook';
 
 }

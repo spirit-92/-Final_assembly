@@ -40,14 +40,5 @@ class StoreBookAdd extends FormRequest
             ];
 
     }
-    public function withValidator($validator)
-    {
-        view('bookView.book',[
-                'author'=> Author::all(),
-                'books'=> Book::all(),
-                'audition'=> Audition::all(),
-                'baseReader'=> BaseReader::all()
-            ]);
 
-    }
 }
