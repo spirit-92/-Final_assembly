@@ -132,4 +132,17 @@ class RouteBookController extends Controller
         return redirect()->back();
     }
 
+    public function searchBook(Request $request){
+        if ($request->book !== null){
+            var_dump('book gjkks');
+        }
+        if ($request->author !== null){
+            var_dump('author gjkks');
+        }
+        if ($request->owner !== null){
+            var_dump('owner gjkks');
+        }
+
+    }
+
 }
