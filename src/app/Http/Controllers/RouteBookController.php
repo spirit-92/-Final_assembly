@@ -64,7 +64,8 @@ class RouteBookController extends Controller
         session(['key' => true]);
         $this->create($request);
         return view('bookView.book', [
-            'books' => Book::all()
+            'books' => Book::all(),
+            'status' => 'книга добавлена'
         ]);
 
     }
@@ -115,7 +116,7 @@ class RouteBookController extends Controller
             'audition_id'=> $request->post()['auditions']
         ]);
 
-        return redirect('/books');
+        return redirect('/books')->with('status', 'книга обновена');
     }
 
     /**

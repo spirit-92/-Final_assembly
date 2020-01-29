@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\helpers\BaseReaderHelpers;
 use App\Http\Requests\StoreBaseReaders;
 use App\model\BaseReader;
 use App\model\Book;
@@ -44,20 +45,8 @@ class ReaderController extends Controller
      */
     public function store(StoreBaseReaders $request)
     {
-        $checkRepeat = BaseReader::where('id_reader', $request->reader)->where('id_book', $request->book)->count();
-        if ($checkRepeat) {
-            BaseReader::where('id_reader', $request->reader)->where('id_book', $request->book)->update(['id_rate' => $request->rate]);
-            return redirect('/books');
-        } else {
-            $saveBaseReader = new BaseReader([
-                'id_reader' => $request->reader,
-                'id_book' => $request->book,
-                'id_rate' => $request->rate
-            ]);
-            $saveBaseReader->save();
-            return redirect('/books');
-        }
-
+        $route = BaseReaderHelpers::storeBaseReaderR($request);
+        return redirect('./books')->with('status', $route);
     }
 
     /**
