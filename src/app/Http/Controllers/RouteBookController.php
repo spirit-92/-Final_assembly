@@ -141,7 +141,6 @@ class RouteBookController extends Controller
         return view('bookView.book', [
             'searchBook' => $books,
             'authors' => Author::all(),
-
         ]);
 
     }
