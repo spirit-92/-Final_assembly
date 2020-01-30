@@ -26,7 +26,7 @@
         <label for="exampleFormControlSelect1">Reader</label>
         <select name="reader" class="form-control" id="exampleFormControlSelect1">
             @foreach($readers as $reader)
-                <option value="{{$reader['id']}}">{{$reader['name']}}</option>
+                <option value="{{$reader['id']}}">{{$reader['reader_name']}}</option>
             @endforeach
         </select>
     </div>
@@ -34,7 +34,7 @@
         <label for="exampleFormControlSelect2">Book</label>
         <select name="book" class="form-control" id="exampleFormControlSelect2">
             @foreach($books as $book)
-                <option value="{{$book['id']}}">{{$book['name']}}</option>
+                <option value="{{$book['id']}}">{{$book['book_name']}}</option>
             @endforeach
         </select>
     </div>

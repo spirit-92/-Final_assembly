@@ -70,11 +70,17 @@
         <input name="owner" type="text" class="form-control" id="exampleInputSearchOwner">
     </div>
     <div class="form-group">
-        <label for="exampleInputSearchOwner">By country</label>
-        <input name="owner" type="text" class="form-control" id="exampleInputSearchOwner">
+        <label for="exampleInputSearchCountry">By country</label>
+        <input name="country" type="text" class="form-control" id="exampleInputSearchCountry">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputSearchCity">By city</label>
+        <input name="city" type="text" class="form-control" id="exampleInputSearchCity">
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
+
+
 {{--search--}}
 @if(isset($books))
     <div style="margin-top: 70px;" class="container">
@@ -86,19 +92,19 @@
                         {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
                         <div class="cardImg"></div>
                         <div class="card-body">
-                            <h5 class="card-title">Book: {{$book['name']}}</h5>
-                            <p class="card-text">Author: {{$book->author->name}}</p>
+                            <h5 class="card-title">Book: {{$book['book_name']}}</h5>
+                            <p class="card-text">Author: {{$authors->find($book['author_id'])['author_name']}}</p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Year: {{$book['year']}}</li>
                             <li class="list-group-item">City:
                                 @foreach($book->city as $city)
-                                    {{$city->name}}
+                                    {{$city->city_name}}
                                 @endforeach
                             </li>
                             <li class="list-group-item">
                                 @foreach($book->owner as $owner)
-                                    Owner:  {{$owner->name}}
+                                    Owner:  {{$owner->owner_name}}
                                 @endforeach
                             </li>
                         </ul>

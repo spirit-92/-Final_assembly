@@ -43,7 +43,7 @@
         <select name="authors" class="form-control" id="exampleFormControlSelect1">
             @if(isset($authors))
                 @foreach($authors as $author)
-                    <option value="{{$author->id}}">{{$author->name}}</option>
+                    <option value="{{$author->id}}">{{$author->author_name}}</option>
                 @endforeach
             @endif
         </select>
@@ -64,7 +64,7 @@
         <select name="auditions" class="form-control" id="exampleFormControlSelect1">
             @if(isset($owners))
                 @foreach($owners as $owner)
-                    <option value="{{$owner->id}}">{{$owner->name}}</option>
+                    <option value="{{$owner->id}}">{{$owner->owner_name}}</option>
                 @endforeach
             @endif
         </select>

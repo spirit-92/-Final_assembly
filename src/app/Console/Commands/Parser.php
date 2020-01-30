@@ -46,7 +46,7 @@ class Parser extends Command
             $crawler = $crawler->filter('.item-title');
             foreach ($crawler as $domElement) {
                 $addAuthor = new Author([
-                    'name' => trim($domElement->textContent),
+                    'author_name' => trim($domElement->textContent),
                 ]);
                 $addAuthor->save();
             }

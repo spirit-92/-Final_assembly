@@ -15,7 +15,7 @@ class CreateOwner extends Migration
     {
         Schema::create('owner', function (Blueprint $table) {
             $table->integer('id')->unique();
-            $table->string('name',255);
+            $table->string('owner_name',255);
         });
     }
 

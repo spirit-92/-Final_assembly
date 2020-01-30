@@ -15,7 +15,7 @@ class CreateAuthors extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('name',255);
+            $table->string('author_name',255);
         });
 
     }

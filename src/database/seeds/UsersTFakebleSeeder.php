@@ -23,19 +23,19 @@ class UsersTFakebleSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('owner')->insert([
                 'id'=> $i,
-                'name' => $faker->name
+                'owner_name' => $faker->name
             ]);
         }
         for ($i = 1; $i <= 10; $i++) {
                 DB::table('country')->insert([
                 'id'=> $i,
-                'name' => $faker->country
+                'country_name' => $faker->country
             ]);
         }
         for ($i = 1; $i <= 10; $i++) {
                 DB::table('city')->insert([
                 'id'=> $i,
-                'name' => $faker->city,
+                'city_name' => $faker->city,
                 'country_id'=>$i
             ]);
         }
@@ -48,7 +48,7 @@ class UsersTFakebleSeeder extends Seeder
         }
         for ($i = 1; $i <= 10; $i++) {
             DB::table('books')->insert([
-                'name' => $faker->text(20),
+                'book_name' => $faker->text(20),
                 'author_id'=>rand(1,10),
                 'year'=>rand(1,2019),
                 'audition_id'=>rand(1,10)
@@ -58,7 +58,7 @@ class UsersTFakebleSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('readers')->insert([
                 'id'=> $i,
-                'name' => $faker->name,
+                'reader_name' => $faker->name,
             ]);
         }
         for ($i = 1; $i <= 10; $i++) {

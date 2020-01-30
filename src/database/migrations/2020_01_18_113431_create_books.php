@@ -15,7 +15,7 @@ class CreateBooks extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('name',50);
+            $table->string('book_name',50);
             $table->integer('author_id');
             $table->smallInteger('year');
             $table->integer('audition_id');

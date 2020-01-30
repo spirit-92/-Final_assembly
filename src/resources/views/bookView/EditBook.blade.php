@@ -19,20 +19,20 @@
     </div>
 @endif
 <div style="margin-top: 100px;">
-    <h1 style="text-align: center">Book edit: {{$book['name']}}</h1>
+    <h1 style="text-align: center">Book edit: {{$book['book_name']}}</h1>
 <form style="width: 600px;margin: 0 auto" action="{{url('/PutBook', ['id' => $book['id']])}}" method="POST">
     @method('PUT')
     @csrf
     <div class="form-group">
         <label for="exampleInputText">Name</label>
-        <input name="name" type="text" value="{{$book['name']}}" class="form-control" id="exampleInputText" aria-describedby="textHelp">
+        <input name="name" type="text" value="{{$book['book_name']}}" class="form-control" id="exampleInputText" aria-describedby="textHelp">
     </div>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Authors</label>
         <select name="authors" class="form-control" id="exampleFormControlSelect1">
             @if(isset($authors))
                 @foreach($authors as $author)
-                    <option value="{{$author->id}}">{{$author->name}}</option>
+                    <option value="{{$author->id}}">{{$author->author_name}}</option>
                 @endforeach
             @endif
         </select>
@@ -46,7 +46,7 @@
         <select name="auditions" class="form-control" id="exampleFormControlSelect1">
             @if(isset($owners))
                 @foreach($owners as $owner)
-                    <option value="{{$owner->id}}">{{$owner->name}}</option>
+                    <option value="{{$owner->id}}">{{$owner->owner_name}}</option>
                 @endforeach
             @endif
         </select>

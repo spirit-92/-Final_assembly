@@ -33,7 +33,7 @@ class StoreBookAdd extends FormRequest
     {
 
             return [
-                'name' => 'required|max:10|min:3|unique:books,name',
+                'name' => 'required|max:10|min:3|unique:books,book_name',
                 'authors' => 'required|exists:authors,id',
                 'years' => 'required|numeric|min:1400',
                 'auditions' => "required|exists:authors,id",

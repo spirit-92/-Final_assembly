@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\helpers\SearchHelper;
 use App\Http\Requests\StoreBookAdd;
 use App\model\Audition;
 use App\model\BaseReader;
@@ -31,8 +32,9 @@ class RouteBookController extends Controller
      */
     public function create(Request $request)
     {
+
         $addBook = new Book([
-            'name' => $request->name,
+            'book_name' => $request->name,
             'author_id' => $request->authors,
             'year' => $request->years,
             'audition_id' => $request->auditions
@@ -48,10 +50,10 @@ class RouteBookController extends Controller
      */
     public function store(Request $request)
     {
-
         if (session('key')) {
             return view('bookView.book', [
-                'books' => Book::all()
+                'books' => Book::all(),
+                'authors' => Author::all()
             ]);
         }
         try {
@@ -65,6 +67,7 @@ class RouteBookController extends Controller
         $this->create($request);
         return view('bookView.book', [
             'books' => Book::all(),
+            'authors' => Author::all(),
             'status' => 'книга добавлена'
         ]);
 
@@ -110,10 +113,10 @@ class RouteBookController extends Controller
     public function update(StoreBookAdd $request, $id)
     {
         Book::find($id)->update([
-            'name' => $request->post()['name'],
+            'book_name' => $request->post()['name'],
             'author_id' => $request->post()['authors'],
             'year' => $request->post()['years'],
-            'audition_id'=> $request->post()['auditions']
+            'audition_id' => $request->post()['auditions']
         ]);
 
         return redirect('/books')->with('status', 'книга обновена');
@@ -132,17 +135,34 @@ class RouteBookController extends Controller
         return redirect()->back();
     }
 
-    public function searchBook(Request $request){
-        if ($request->book !== null){
-            var_dump('book gjkks');
+    public function searchBook(Request $request)
+    {
+       $books = SearchHelper::search($request);
+        if ($request->book !== null) {
+            $result = Book::where('book_name', 'LIKE', "$request->book%")->get();
         }
-        if ($request->author !== null){
-            var_dump('author gjkks');
-        }
-        if ($request->owner !== null){
-            var_dump('owner gjkks');
-        }
+        if ($request->author !== null) {
+            $result = Book::join('authors', 'books.author_id', '=', 'authors.id')
+                ->select('books.*', 'authors.author_name')->where('authors.author_name', 'LIKE', "$request->author%")->get();
 
+        }
+        if ($request->owner !== null) {
+            $result = Book::join('auditions', 'books.audition_id', '=', 'auditions.owner')
+                ->join('owner', 'auditions.owner', '=', 'owner.id')
+                ->select('books.*', 'owner.owner_name')->where('owner.owner_name', 'LIKE', "$request->owner%")->get();
+        }
+        if ($request->country !== null) {
+            $result = Book::join('auditions', 'books.audition_id', '=', 'auditions.city')
+                ->join('city', 'auditions.city', '=', 'city.id')
+                ->join('country', 'city.country_id', '=', 'country.id')
+                ->select('books.*', 'country.country_name')->where('country.country_name', 'LIKE', "$request->country%")->get();
+        }
+        if ($request->city !== null) {
+            $result = Book::join('auditions', 'books.audition_id', '=', 'auditions.city')
+                ->join('city', 'auditions.city', '=', 'city.id')
+                ->select('books.*', 'city.city_name')->where('city.city_name', 'LIKE', "$request->city%")->get();
+        }
+//        var_dump($book);
     }
 
 }

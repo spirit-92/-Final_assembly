@@ -29,8 +29,8 @@
         <div class="cardImg"></div>
         {{--    <img src="..." class="card-img-top" alt="...">--}}
         <div class="card-body">
-            <h5 class="card-title">{{$book['name']}}</h5>
-            <p class="card-text">Author: {{$author::find($book['author_id'])->name}}</p>
+            <h5 class="card-title">{{$book['book_name']}}</h5>
+            <p class="card-text">Author: {{$author::find($book['author_id'])->author_name}}</p>
             <p class="card-text">Year: {{$book['year']}}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
@@ -48,7 +48,7 @@
         @foreach($book->baseReader as $readers)
             <tr>
                 <th scope="row">{{$readers['id']}}</th>
-                <td>{{$readers->reader->name}}</td>
+                <td>{{$readers->reader->reader_name}}</td>
                 <td>{{$readers['id_rate']}}</td>
             </tr>
         @endforeach

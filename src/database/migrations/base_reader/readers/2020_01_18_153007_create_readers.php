@@ -15,7 +15,7 @@ class CreateReaders extends Migration
     {
         Schema::create('readers', function (Blueprint $table) {
             $table->integer('id')->unique();
-            $table->string('name',100);
+            $table->string('reader_name',100);
 
         });
     }
