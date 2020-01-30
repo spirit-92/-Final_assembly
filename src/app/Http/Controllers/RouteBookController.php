@@ -138,31 +138,12 @@ class RouteBookController extends Controller
     public function searchBook(Request $request)
     {
        $books = SearchHelper::search($request);
-        if ($request->book !== null) {
-            $result = Book::where('book_name', 'LIKE', "$request->book%")->get();
-        }
-        if ($request->author !== null) {
-            $result = Book::join('authors', 'books.author_id', '=', 'authors.id')
-                ->select('books.*', 'authors.author_name')->where('authors.author_name', 'LIKE', "$request->author%")->get();
+        return view('bookView.book', [
+            'searchBook' => $books,
+            'authors' => Author::all(),
 
-        }
-        if ($request->owner !== null) {
-            $result = Book::join('auditions', 'books.audition_id', '=', 'auditions.owner')
-                ->join('owner', 'auditions.owner', '=', 'owner.id')
-                ->select('books.*', 'owner.owner_name')->where('owner.owner_name', 'LIKE', "$request->owner%")->get();
-        }
-        if ($request->country !== null) {
-            $result = Book::join('auditions', 'books.audition_id', '=', 'auditions.city')
-                ->join('city', 'auditions.city', '=', 'city.id')
-                ->join('country', 'city.country_id', '=', 'country.id')
-                ->select('books.*', 'country.country_name')->where('country.country_name', 'LIKE', "$request->country%")->get();
-        }
-        if ($request->city !== null) {
-            $result = Book::join('auditions', 'books.audition_id', '=', 'auditions.city')
-                ->join('city', 'auditions.city', '=', 'city.id')
-                ->select('books.*', 'city.city_name')->where('city.city_name', 'LIKE', "$request->city%")->get();
-        }
-//        var_dump($book);
+        ]);
+
     }
 
 }
