@@ -10,8 +10,6 @@ use App\model\Book;
 use App\model\Owner;
 use Illuminate\Http\Request;
 use App\model\Author;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 
 class RouteBookController extends Controller
