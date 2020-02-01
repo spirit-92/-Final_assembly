@@ -10,10 +10,12 @@ use App\model\Book;
 use App\model\Owner;
 use Illuminate\Http\Request;
 use App\model\Author;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 
 class RouteBookController extends Controller
 {
+
     public function index()
     {
         return view('welcome', [
@@ -51,7 +53,8 @@ class RouteBookController extends Controller
         if (session('key')) {
             return view('bookView.book', [
                 'books' => Book::all(),
-                'authors' => Author::all()
+                'authors' => Author::all(),
+                'searchBook' =>SearchHelper::search($request)
             ]);
         }
         try {
@@ -133,14 +136,6 @@ class RouteBookController extends Controller
         return redirect()->back();
     }
 
-    public function searchBook(Request $request)
-    {
-       $books = SearchHelper::search($request);
-        return view('bookView.book', [
-            'searchBook' => $books,
-            'authors' => Author::all(),
-        ]);
 
-    }
 
 }

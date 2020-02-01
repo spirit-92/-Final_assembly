@@ -53,9 +53,21 @@
         </div>
     </div>
 @endif
+<nav class="navbar navbar-dark bg-dark">
+    </button>
+    <div class="navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav" style="width: 200px;justify-content: space-evenly;flex-direction: row">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Add book <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AddReader">Add reader</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<h1 style="text-align: center;margin-top: 50px;">Books</h1>
-<form method="get" action="/searchBook" style="width: 600px;margin: 0 auto">
+<form method="get" action="/books" style="width: 600px;margin: 0 auto">
     <h3 style="text-align: center;margin-top: 50px;">Search</h3>
     <div class="form-group">
         <label for="exampleInputSearchBook">By book</label>
@@ -80,10 +92,214 @@
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
-
 {{--search--}}
+@if(isset($searchBook['book'][0][0]))
+    <div style="margin-top: 70px;" class="container">
+        <h2 style="text-align: center">Search by name book</h2>
+        <div class="row">
+            @foreach($searchBook['book'] as $book)
+                @foreach($book as $bookAtr)
+                    <div class="cardMy col-4">
+                        <div class="card" style="width: 18rem;text-align: center">
+                            {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
+                            <div class="cardImg"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
+                                <p class="card-text">
+                                    Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
+                                <li class="list-group-item">City:
+                                    @foreach($bookAtr->city as $city)
+                                        {{$city->city_name}}
+                                    @endforeach
+                                </li>
+                                <li class="list-group-item">
+                                    @foreach($bookAtr->owner as $owner)
+                                        Owner:  {{$owner->owner_name}}
+                                    @endforeach
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
+                                <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
+                                <a href="/bookDelete/{{$bookAtr['id']}}" class="btn btn-danger"
+                                   style="margin-top: 15px;">delete</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endforeach
+        </div>
+    </div>
+@endif
+@if(isset($searchBook['author'][0][0]))
+    <div style="margin-top: 70px;" class="container">
+        <h2 style="text-align: center">Search by name author</h2>
+        <div class="row">
+            @foreach($searchBook['author'] as $book)
+                @foreach($book as $bookAtr)
+                    <div class="cardMy col-4">
+                        <div class="card" style="width: 18rem;text-align: center">
+                            {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
+                            <div class="cardImg"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
+                                <p class="card-text">
+                                    Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
+                                <li class="list-group-item">City:
+                                    @foreach($bookAtr->city as $city)
+                                        {{$city->city_name}}
+                                    @endforeach
+                                </li>
+                                <li class="list-group-item">
+                                    @foreach($bookAtr->owner as $owner)
+                                        Owner:  {{$owner->owner_name}}
+                                    @endforeach
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
+                                <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
+                                <a href="/bookDelete/{{$bookAtr['id']}}" class="btn btn-danger"
+                                   style="margin-top: 15px;">delete</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endforeach
+        </div>
+    </div>
+@endif
+@if(isset($searchBook['owner'][0][0]))
+    <div style="margin-top: 70px;" class="container">
+        <h2 style="text-align: center">Search by name owner</h2>
+        <div class="row">
+            @foreach($searchBook['owner'] as $book)
+                @foreach($book as $bookAtr)
+                    <div class="cardMy col-4">
+                        <div class="card" style="width: 18rem;text-align: center">
+                            {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
+                            <div class="cardImg"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
+                                <p class="card-text">
+                                    Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
+                                <li class="list-group-item">City:
+                                    @foreach($bookAtr->city as $city)
+                                        {{$city->city_name}}
+                                    @endforeach
+                                </li>
+                                <li class="list-group-item">
+                                    @foreach($bookAtr->owner as $owner)
+                                        Owner:  {{$owner->owner_name}}
+                                    @endforeach
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
+                                <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
+                                <a href="/bookDelete/{{$bookAtr['id']}}" class="btn btn-danger"
+                                   style="margin-top: 15px;">delete</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endforeach
+        </div>
+    </div>
+@endif
+@if(isset($searchBook['country'][0][0]))
+    <div style="margin-top: 70px;" class="container">
+        <h2 style="text-align: center">Search by name country</h2>
+        <div class="row">
+            @foreach($searchBook['country'] as $book)
+                @foreach($book as $bookAtr)
+                    <div class="cardMy col-4">
+                        <div class="card" style="width: 18rem;text-align: center">
+                            {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
+                            <div class="cardImg"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
+                                <p class="card-text">
+                                    Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
+                                <li class="list-group-item">City:
+                                    @foreach($bookAtr->city as $city)
+                                        {{$city->city_name}}
+                                    @endforeach
+                                </li>
+                                <li class="list-group-item">
+                                    @foreach($bookAtr->owner as $owner)
+                                        Owner:  {{$owner->owner_name}}
+                                    @endforeach
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
+                                <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
+                                <a href="/bookDelete/{{$bookAtr['id']}}" class="btn btn-danger"
+                                   style="margin-top: 15px;">delete</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endforeach
+        </div>
+    </div>
+@endif
+@if(isset($searchBook['city'][0][0]))
+    <div style="margin-top: 70px;" class="container">
+        <h2 style="text-align: center">Search by name city</h2>
+        <div class="row">
+            @foreach($searchBook['city'] as $book)
+                @foreach($book as $bookAtr)
+                    <div class="cardMy col-4">
+                        <div class="card" style="width: 18rem;text-align: center">
+                            {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
+                            <div class="cardImg"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
+                                <p class="card-text">
+                                    Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
+                                <li class="list-group-item">City:
+                                    @foreach($bookAtr->city as $city)
+                                        {{$city->city_name}}
+                                    @endforeach
+                                </li>
+                                <li class="list-group-item">
+                                    @foreach($bookAtr->owner as $owner)
+                                        Owner:  {{$owner->owner_name}}
+                                    @endforeach
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
+                                <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
+                                <a href="/bookDelete/{{$bookAtr['id']}}" class="btn btn-danger"
+                                   style="margin-top: 15px;">delete</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endforeach
+        </div>
+    </div>
+@endif
+<h1 style="text-align: center;margin-top: 50px;">Books</h1>
 @if(isset($books))
-    <a style="text-align: center" class="nav-item nav-link" href="/AddReader">Add reader</a>
     <div style="margin-top: 70px;" class="container">
         <div class="row">
             @foreach($books as $book)
@@ -111,235 +327,15 @@
                         <div class="card-body">
                             <a href="book/{{$book['id']}}" class="card-link">About book</a>
                             <a href="bookUpdate/{{$book['id']}}" class="card-link">Editing book</a>
-                            <form action="{{url('/bookDelete', ['id' => $book['id']])}}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-danger" style="margin-top: 15px;">delete</button>
-                            </form>
+                            <a href="/bookDelete/{{$book['id']}}" class="btn btn-danger" style="margin-top: 15px;">delete</a>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-@else
-    <a style="text-align: center" class="nav-item nav-link" href="/AddReader">Add reader</a>
-    @if(count($searchBook['book']))
-        <div style="margin-top: 70px;" class="container">
-            <h2 style="text-align: center">Search by name book</h2>
-            <div class="row">
-                @foreach($searchBook['book'] as $book)
-                    @foreach($book as $bookAtr)
-                    <div class="cardMy col-4">
-                        <div class="card" style="width: 18rem;text-align: center">
-                            {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
-                            <div class="cardImg"></div>
-                            <div class="card-body">
-                                <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
-                                <p class="card-text">Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
-                                <li class="list-group-item">City:
-                                    @foreach($bookAtr->city as $city)
-                                        {{$city->city_name}}
-                                    @endforeach
-                                </li>
-                                <li class="list-group-item">
-                                    @foreach($bookAtr->owner as $owner)
-                                        Owner:  {{$owner->owner_name}}
-                                    @endforeach
-                                </li>
-                            </ul>
-                            <div class="card-body">
-                                <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
-                                <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
-                                <form action="{{url('/bookDelete', ['id' => $bookAtr['id']])}}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger" style="margin-top: 15px;">delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                @endforeach
-            </div>
-        </div>
-    @endif
-    @if(count($searchBook['author']))
-        <div style="margin-top: 70px;" class="container">
-            <h2 style="text-align: center">Search by name author</h2>
-            <div class="row">
-                @foreach($searchBook['author'] as $book)
-                    @foreach($book as $bookAtr)
-                        <div class="cardMy col-4">
-                            <div class="card" style="width: 18rem;text-align: center">
-                                {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
-                                <div class="cardImg"></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
-                                    <p class="card-text">Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
-                                    <li class="list-group-item">City:
-                                        @foreach($bookAtr->city as $city)
-                                            {{$city->city_name}}
-                                        @endforeach
-                                    </li>
-                                    <li class="list-group-item">
-                                        @foreach($bookAtr->owner as $owner)
-                                            Owner:  {{$owner->owner_name}}
-                                        @endforeach
-                                    </li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
-                                    <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
-                                    <form action="{{url('/bookDelete', ['id' => $bookAtr['id']])}}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 15px;">delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endforeach
-            </div>
-        </div>
-    @endif
-    @if(count($searchBook['owner']))
-        <div style="margin-top: 70px;" class="container">
-            <h2 style="text-align: center">Search by name owner</h2>
-            <div class="row">
-                @foreach($searchBook['owner'] as $book)
-                    @foreach($book as $bookAtr)
-                        <div class="cardMy col-4">
-                            <div class="card" style="width: 18rem;text-align: center">
-                                {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
-                                <div class="cardImg"></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
-                                    <p class="card-text">Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
-                                    <li class="list-group-item">City:
-                                        @foreach($bookAtr->city as $city)
-                                            {{$city->city_name}}
-                                        @endforeach
-                                    </li>
-                                    <li class="list-group-item">
-                                        @foreach($bookAtr->owner as $owner)
-                                            Owner:  {{$owner->owner_name}}
-                                        @endforeach
-                                    </li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
-                                    <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
-                                    <form action="{{url('/bookDelete', ['id' => $bookAtr['id']])}}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 15px;">delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endforeach
-            </div>
-        </div>
-    @endif
-    @if(count($searchBook['country']))
-        <div style="margin-top: 70px;" class="container">
-            <h2 style="text-align: center">Search by name country</h2>
-            <div class="row">
-                @foreach($searchBook['country'] as $book)
-                    @foreach($book as $bookAtr)
-                        <div class="cardMy col-4">
-                            <div class="card" style="width: 18rem;text-align: center">
-                                {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
-                                <div class="cardImg"></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
-                                    <p class="card-text">Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
-                                    <li class="list-group-item">City:
-                                        @foreach($bookAtr->city as $city)
-                                            {{$city->city_name}}
-                                        @endforeach
-                                    </li>
-                                    <li class="list-group-item">
-                                        @foreach($bookAtr->owner as $owner)
-                                            Owner:  {{$owner->owner_name}}
-                                        @endforeach
-                                    </li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
-                                    <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
-                                    <form action="{{url('/bookDelete', ['id' => $bookAtr['id']])}}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 15px;">delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endforeach
-            </div>
-        </div>
-    @endif
-    @if(count($searchBook['city']))
-        <div style="margin-top: 70px;" class="container">
-            <h2 style="text-align: center">Search by name city</h2>
-            <div class="row">
-                @foreach($searchBook['city'] as $book)
-                    @foreach($book as $bookAtr)
-                        <div class="cardMy col-4">
-                            <div class="card" style="width: 18rem;text-align: center">
-                                {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
-                                <div class="cardImg"></div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
-                                    <p class="card-text">Author: {{$authors->find($bookAtr['author_id'])['author_name']}}</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Year: {{$bookAtr['year']}}</li>
-                                    <li class="list-group-item">City:
-                                        @foreach($bookAtr->city as $city)
-                                            {{$city->city_name}}
-                                        @endforeach
-                                    </li>
-                                    <li class="list-group-item">
-                                        @foreach($bookAtr->owner as $owner)
-                                            Owner:  {{$owner->owner_name}}
-                                        @endforeach
-                                    </li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="book/{{$bookAtr['id']}}" class="card-link">About book</a>
-                                    <a href="bookUpdate/{{$bookAtr['id']}}" class="card-link">Editing book</a>
-                                    <form action="{{url('/bookDelete', ['id' => $bookAtr['id']])}}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 15px;">delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endforeach
-            </div>
-        </div>
-    @endif
 @endif
+
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
