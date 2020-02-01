@@ -54,7 +54,6 @@
     </div>
 @endif
 <nav class="navbar navbar-dark bg-dark">
-    </button>
     <div class="navbar-collapse" id="navbarNav">
         <ul class="navbar-nav" style="width: 200px;justify-content: space-evenly;flex-direction: row">
             <li class="nav-item active">
@@ -101,7 +100,7 @@
                 @foreach($book as $bookAtr)
                     <div class="cardMy col-4">
                         <div class="card" style="width: 18rem;text-align: center">
-                            {{--                        <img src="..." class="cardImg card-img-top" alt="...">--}}
+                            {{--<img src="..." class="cardImg card-img-top" alt="...">--}}
                             <div class="cardImg"></div>
                             <div class="card-body">
                                 <h5 class="card-title">Book: {{$bookAtr['book_name']}}</h5>
