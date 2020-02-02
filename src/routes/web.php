@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+use Illuminate\Support\Facades\Route;
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/','RouteBookController@index')->name('/');
+
+Route::get('/books','RouteBookController@store')->name('books');
+
+Route::get('/book/{id}','RouteBookController@show')->name('book');
+Route::get('/bookDelete/{id}', 'RouteBookController@destroy')->name('delete');;
+Route::get('/bookUpdate/{id}', 'RouteBookController@edit')->name('bookUpdate');
+Route::put('/PutBook/{id}', 'RouteBookController@update')->name('PutBook');
+
+
+Route::get('/AddReader','ReaderController@index')->name('AddReader');
+Route::get('/PostReader','ReaderController@store')->name('PostReader');
