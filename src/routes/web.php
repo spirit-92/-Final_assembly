@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response([
+        'headers' => 'header',
+        'body' => 'sdadasdad',
+        'status' => 200
+    ]);
 });
