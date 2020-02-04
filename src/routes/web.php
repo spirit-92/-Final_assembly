@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return response([
-        'headers' => 'header',
-        'body' => 'sdadasdad',
-        'status' => 200
-    ]);
-});
+//Route::get('/', function () {
+//    return response([
+//        'headers' => 'header',
+//        'body' => 'sdadasdad',
+//        'status' => 200
+//    ]);
+//});
+Route::post('/','RegisterController@store')->name('register');

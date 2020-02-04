@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\RegisterUserRequest;
-use App\Http\Resources\User;
-use App\Services\UserSercvices;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Ramsey\Uuid\Uuid;
+use Faker;
 
-class RegisterController extends Controller
+class WeatherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,20 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        $faker = Faker\Factory::create();
+        $items = [];
+        for ($i = 0; $i < 10; $i++) {
+            $items[] = [
+                'name' => $faker->name,
+                'sur_name' => $faker->lastName,
+                'city' => $faker->city,
+            ];
+        }
+        return response([
+            'count' => 10,
+            'totalCount' => 100,
+            'items' =>$items
+         ],200);
     }
 
     /**
@@ -33,23 +46,18 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
+        //
     }
-    public function register(RegisterUserRequest $request, UserSercvices $sercvice)
-    {
-       $user = $sercvice->store($request);
 
-       return new User($user);
-    }
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +68,7 @@ class RegisterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -71,8 +79,8 @@ class RegisterController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,7 +91,7 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

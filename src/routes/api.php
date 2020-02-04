@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/register','Api\RegisterController@register')->name('register');
+Route::post('/token','Api\AuthController@getToken')->name('get_token');
+
+Route::middleware('auth_api')->group(function (){
+    Route::get('/weather','Api\WeatherController@index')->name('weather_list');
 });
