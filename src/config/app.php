@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+        'lifetimeTokenMin'=> 30,
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        App\Providers\CustomCheckEmail::class,
 
         /*
          * Package Service Providers...
