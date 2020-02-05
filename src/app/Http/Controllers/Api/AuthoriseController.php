@@ -16,7 +16,7 @@ class AuthoriseController extends Controller
             return response([
                 'token' => $token
             ], 200);
-        }else{
+        } else {
             return response([
                 'error' => 'error request'
             ], 400);
